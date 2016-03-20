@@ -25,7 +25,8 @@ main(int argc, char * argv[])
         //padding the secret hex if less than 20 characters were provided
         uint8_t pad[21] = {0};
         memset (pad, '0', 20);
-        for (int i = 0; i < strlen(secret_hex); ++i) {
+        int i = 0;
+        for (i = 0; i < strlen(secret_hex); ++i) {
         	pad[i] = secret_hex[i];
         }
         
@@ -35,7 +36,6 @@ main(int argc, char * argv[])
         //changing the hex string to a byte array
         char * pos = pad;
         uint8_t val[10];
-        size_t i = 0;
         for (i = 0; i < sizeof(val)/sizeof(val[0]); i++){
             sscanf(pos, "%2hhx", &val[i]);
             pos += 2;

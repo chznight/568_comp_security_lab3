@@ -13,7 +13,8 @@ int compute_OTP (char * secret_hex, long long int counter) {
 	//edit: lab handout probably had a typo @pad with leading zeroes
     uint8_t pad[21] = {0};
     memset (pad, '0', 20);
-    for (int i = 0; i < strlen(secret_hex); ++i) {
+    int i;
+    for (i = 0; i < strlen(secret_hex); ++i) {
        	pad[i] = secret_hex[i];
     }
 
@@ -21,7 +22,6 @@ int compute_OTP (char * secret_hex, long long int counter) {
     char * pos = pad;
     uint8_t c[8];
     uint8_t val[10] = {0};
-    size_t i = 0;
     for (i = 0; i < 10; i++){
         sscanf(pos, "%2hhx", &val[i]);
         pos += 2;
@@ -38,14 +38,14 @@ int compute_OTP (char * secret_hex, long long int counter) {
     memcpy( val_ipad, val, 10);
     memcpy( val_opad, val, 10);
 
-    for (int i = 0; i < 64; ++i)
+    for (i = 0; i < 64; ++i)
     {
     	val_ipad[i] = val_ipad[i] ^ 0x36;
     	val_opad[i] = val_opad[i] ^ 0x5c;
     }
 
     //binary value of counter, 64 bits
-    for (int i=7; i>=0; i--) {
+    for (i=7; i>=0; i--) {
     	c[i] = (uint8_t) counter & 0xff;
     	counter = counter >> 8;
     }
@@ -72,7 +72,8 @@ int compute_OTP (char * secret_hex, long long int counter) {
 
 void covert_to_string (int otp, char*out, int size) {
 	memset (out, 0, size+1);
-	for (int i = 0; i < size; i++) {
+	int i;
+	for (i = 0; i < size; i++) {
 		int digit = otp % 10;
 		out[size-i-1] = digit + '0';
 		otp = otp /10;
