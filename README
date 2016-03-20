@@ -1,0 +1,15 @@
+#Chen Hao Zhang, 999272228, chenhao.zhang@mail.utoronto.ca
+#Matthew Cheung, 1000697150, matthewkc.cheung@mail.utoronto.ca
+
+Part 1
+The goal of Part 1 is to create the URI used to generate the QR code. 
+The ACCOUNTNAME and ISSUER provided by the user is encoded using the provided
+urlEncode() function.
+SECRET is checked to ensure its length is 20. If not, a leading pad of 0s is 
+created and the secret is then cancatenated to the pad. The hex string is
+converted to a byte array, and this byte array is then encoded in Base-32 using
+the provided base32_encode() function.
+The URI for the HOTP and TOTP is then created with numerous strcat and the URI
+is then displayed with the displayQRcode() function.
+
+Part 2 
